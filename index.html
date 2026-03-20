@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Altum Rooftop en Medellín: gastronomía sostenible, reservaciones y experiencias en altura."/>
+  <meta property="og:title" content="Altum Rooftop · Gastronomía Sostenible"/>
+  <meta property="og:description" content="Descubre Altum Rooftop: reserva mesa, explora el menú y vive experiencias únicas en Medellín."/>
+  <meta property="og:type" content="website"/>
+  <title>Altum Rooftop · Gastronomía Sostenible en Medellín</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      --negro:   #0d110d;
+      --verde:   #1a2e1a;
+      --verde2:  #243824;
+      --dorado:  #c8a45a;
+      --dorado2: #e2c07a;
+      --crema:   #f0ead8;
+      --gris:    #7a7a6a;
+      --blanco:  #fafaf5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--negro);
+      color: var(--crema);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 3.5rem;
+      transition: background 0.5s, backdrop-filter 0.5s;
+    }
+    nav.scrolled {
+      background: rgba(13,17,13,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,164,90,0.15);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--crema);
+      text-decoration: none;
+    }
+    .logo em { font-style: italic; color: var(--dorado); }
+
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; align-items: center; }
+    .nav-links a {
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(240,234,216,0.7);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--dorado); }
+
+    /* Botón compartir en navbar — del Doc 4 */
+    #shareBtn {
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      background: none;
+      border: 1px solid rgba(200,164,90,0.3);
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    #shareBtn:hover { background: rgba(200,164,90,0.1); border-color: var(--dorado); }
+
+    .nav-cta {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 400;
+      color: var(--negro);
+      background: var(--dorado);
+      padding: 0.55rem 1.4rem;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .nav-cta:hover { background: var(--dorado2); }
+
+    /* ── HAMBURGUESA ── */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      z-index: 202;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .menu-toggle span {
+      width: 26px;
+      height: 1.5px;
+      background: var(--dorado);
+      transition: transform 0.3s, opacity 0.3s;
+      display: block;
+    }
+    .menu-toggle.abierto span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .menu-toggle.abierto span:nth-child(2) { opacity: 0; }
+    .menu-toggle.abierto span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    /* ── HERO ── */
+    #inicio {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('imagenes/vista-aerea1.jpg') center/cover no-repeat;
+      animation: slowZoom 12s ease-out forwards;
+    }
+    @keyframes slowZoom {
+      from { transform: scale(1.1); }
+      to   { transform: scale(1.0); }
+    }
+
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to right, rgba(13,17,13,0.6) 0%, transparent 70%),
+        linear-gradient(to top, rgba(13,17,13,0.96) 0%, rgba(13,17,13,0.4) 40%, rgba(13,17,13,0.1) 100%);
+    }
+
+    .hero-line {
+      position: absolute; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(200,164,90,0.25), transparent);
+      animation: fadeIn 2s ease 1s both;
+    }
+    .hero-line:nth-child(1) { left: 33.33%; }
+    .hero-line:nth-child(2) { left: 66.66%; }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 3.5rem 5.5rem;
+      max-width: 680px;
+      animation: slideUp 1.2s cubic-bezier(0.16,1,0.3,1) 0.4s both;
+    }
+    @keyframes slideUp {
+      from { opacity:0; transform: translateY(40px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 1.5rem;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 28px; height: 1px;
+      background: var(--dorado);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6.5vw, 5.2rem);
+      font-weight: 400;
+      line-height: 1.08;
+      color: var(--blanco);
+      margin-bottom: 1.6rem;
+    }
+    .hero-title em { font-style: italic; color: var(--dorado); }
+
+    .hero-desc {
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(240,234,216,0.65);
+      max-width: 400px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-gold {
+      padding: 0.9rem 2.2rem;
+      background: var(--dorado);
+      color: var(--negro);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 400;
+      text-decoration: none;
+      transition: background 0.3s;
+      display: inline-block;
+    }
+    .btn-gold:hover { background: var(--dorado2); }
+
+    .btn-outline {
+      padding: 0.9rem 2.2rem;
+      border: 1px solid rgba(240,234,216,0.35);
+      color: var(--crema);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 300;
+      text-decoration: none;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .btn-outline:hover { border-color: var(--dorado); color: var(--dorado); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem; right: 3.5rem;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(240,234,216,0.35);
+    }
+    .hero-scroll::after {
+      content: '';
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, rgba(200,164,90,0.5), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%,100% { opacity:1; transform: scaleY(1); }
+      50%      { opacity:0.3; transform: scaleY(0.6); }
+    }
+
+    /* ── UTILS ── */
+    .sec { padding: 6rem 3.5rem; }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 1.1rem;
+    }
+    .label::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: var(--dorado);
+    }
+
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--crema);
+      margin-bottom: 1.5rem;
+    }
+    .title em { font-style: italic; color: var(--dorado); }
+
+    .body-text {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(240,234,216,0.6);
+    }
+
+    /* ── NOSOTROS ── */
+    #nosotros {
+      background: var(--verde);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      min-height: 600px;
+    }
+
+    .nosotros-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 3px;
+    }
+    .nosotros-images img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.78) saturate(0.85);
+      transition: filter 0.5s;
+    }
+    .nosotros-images img:hover { filter: brightness(0.95) saturate(1); }
+    .nosotros-images img:first-child { grid-row: span 2; }
+
+    .nosotros-text {
+      padding: 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(240,234,216,0.1);
+    }
+    .stat-n {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: var(--dorado);
+      line-height: 1;
+      display: block;
+    }
+    .stat-l {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gris);
+      margin-top: 0.4rem;
+      display: block;
+    }
+
+    /* ── MENÚ ── */
+    #menu { background: var(--negro); }
+
+    .menu-top {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .menu-cats { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .cat {
+      background: none;
+      border: 1px solid rgba(240,234,216,0.12);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(240,234,216,0.45);
+      padding: 0.5rem 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .cat.active, .cat:hover {
+      border-color: var(--dorado);
+      color: var(--dorado);
+      background: rgba(200,164,90,0.07);
+    }
+
+    .menu-cat-titulo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--dorado);
+      margin: 2.5rem 0 0.8rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid rgba(200,164,90,0.18);
+    }
+
+    .menu-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid rgba(240,234,216,0.05);
+      gap: 1.5rem;
+    }
+    .menu-row:hover { background: rgba(240,234,216,0.015); }
+
+    .menu-nombre {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--crema);
+      margin-bottom: 0.3rem;
+    }
+    .menu-desc {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--gris);
+      line-height: 1.55;
+    }
+    .menu-precio {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--dorado);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── EXPERIENCIAS ── */
+    #experiencias { background: var(--verde2); }
+
+    .exp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      margin-top: 3.5rem;
+    }
+
+    .exp-card {
+      position: relative;
+      height: 430px;
+      overflow: hidden;
+    }
+    .exp-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.52) saturate(0.75);
+      transition: filter 0.6s, transform 0.6s;
+    }
+    .exp-card:hover img {
+      filter: brightness(0.72) saturate(1);
+      transform: scale(1.04);
+    }
+    .exp-card-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 2rem 1.8rem;
+      background: linear-gradient(to top, rgba(13,17,13,0.92), transparent);
+    }
+    .exp-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 0.5rem;
+    }
+    .exp-titulo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--blanco);
+      margin-bottom: 0.5rem;
+    }
+    .exp-desc {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: rgba(240,234,216,0.58);
+      line-height: 1.6;
+    }
+
+    /* ── GALERÍA ── */
+    #galeria { background: var(--negro); padding-bottom: 0; }
+
+    .galeria-mosaico {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 290px 290px;
+      gap: 4px;
+      margin-top: 2.5rem;
+    }
+    .galeria-mosaico img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.65) saturate(0.72);
+      transition: filter 0.5s, transform 0.4s;
+      cursor: zoom-in;
+    }
+    .galeria-mosaico img:hover {
+      filter: brightness(1) saturate(1);
+      transform: scale(1.01);
+      position: relative;
+      z-index: 1;
+    }
+    .g1 { grid-column: 1 / 6;  grid-row: 1; }
+    .g2 { grid-column: 6 / 9;  grid-row: 1; }
+    .g3 { grid-column: 9 / 13; grid-row: 1; }
+    .g4 { grid-column: 1 / 4;  grid-row: 2; }
+    .g5 { grid-column: 4 / 9;  grid-row: 2; }
+    .g6 { grid-column: 9 / 13; grid-row: 2; }
+
+    /* ── MODAL GALERÍA ── */
+    .galeria-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(13,17,13,0.95);
+      backdrop-filter: blur(8px);
+      justify-content: center;
+      align-items: center;
+    }
+    .galeria-modal-img {
+      max-width: 90%; max-height: 90%;
+      object-fit: contain;
+    }
+    .galeria-cerrar {
+      position: absolute;
+      top: 20px; right: 30px;
+      color: var(--blanco);
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .galeria-cerrar:hover { color: var(--dorado); }
+    .galeria-nav {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(200,164,90,0.8);
+      color: var(--negro);
+      border: none;
+      font-size: 24px;
+      padding: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .galeria-nav:hover { background: var(--dorado); }
+    .galeria-prev { left: 20px; }
+    .galeria-next { right: 20px; }
+
+    /* ── RESERVACIÓN ── */
+    #reservacion { background: var(--verde); }
+
+    .reservacion-wrap {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .horario-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(240,234,216,0.07);
+      font-size: 0.8rem;
+      font-weight: 300;
+    }
+    .horario-dia { color: rgba(240,234,216,0.45); }
+    .horario-hora { color: var(--crema); }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .fg { display: flex; flex-direction: column; gap: 0.4rem; }
+    .fg.full { grid-column: span 2; }
+
+    label {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gris);
+    }
+    input, select, textarea {
+      background: rgba(13,17,13,0.45);
+      border: 1px solid rgba(240,234,216,0.1);
+      color: var(--crema);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      padding: 0.85rem 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--dorado); }
+    select option { background: var(--verde); }
+    textarea { min-height: 90px; resize: vertical; }
+
+    .btn-form {
+      grid-column: span 2;
+      padding: 1rem;
+      background: var(--dorado);
+      color: var(--negro);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-weight: 400;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 0.3rem;
+    }
+    .btn-form:hover { background: var(--dorado2); }
+
+    /* ── UBICACIÓN ── */
+    #ubicacion {
+      background: var(--negro);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
+    }
+
+    .ubicacion-img {
+      position: relative;
+      overflow: hidden;
+    }
+    .ubicacion-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.5) saturate(0.65);
+    }
+    .ubicacion-badge {
+      position: absolute;
+      bottom: 2rem; left: 2rem;
+      background: rgba(13,17,13,0.88);
+      border: 1px solid rgba(200,164,90,0.4);
+      padding: 0.65rem 1.2rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--dorado);
+    }
+
+    .ubicacion-info {
+      padding: 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .info-bloque { margin-bottom: 2rem; }
+    .info-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 0.5rem;
+    }
+    .info-valor {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--crema);
+      line-height: 1.75;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080b08;
+      padding: 4rem 3.5rem 2rem;
+      border-top: 1px solid rgba(200,164,90,0.1);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(240,234,216,0.05);
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--dorado);
+      margin-bottom: 1rem;
+    }
+    .footer-brand em { font-style: italic; }
+
+    .footer-desc {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--gris);
+      line-height: 1.85;
+      max-width: 230px;
+    }
+
+    .footer-col-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 1.4rem;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.7rem; }
+    .footer-col a {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgba(240,234,216,0.42);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-col a:hover { color: var(--crema); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-copy {
+      font-size: 0.66rem;
+      color: rgba(240,234,216,0.2);
+      letter-spacing: 0.1em;
+    }
+    .footer-socials { display: flex; gap: 1.5rem; }
+    .footer-socials a {
+      font-size: 0.64rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(240,234,216,0.3);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-socials a:hover { color: var(--dorado); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .menu-toggle { display: flex; }
+      .nav-cta { display: none; }
+      .nav-links {
+        position: fixed;
+        top: 0; right: -100%;
+        width: 75%; max-width: 320px;
+        height: 100vh;
+        background: rgba(13,17,13,0.98);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+        transition: right 0.4s cubic-bezier(0.16,1,0.3,1);
+        z-index: 201;
+        border-left: 1px solid rgba(200,164,90,0.15);
+      }
+      .nav-links.abierto { right: 0; }
+      .nav-links a {
+        font-size: 1rem;
+        letter-spacing: 0.2em;
+      }
+      .nav-links li:last-child::after {
+        content: '';
+        display: block;
+        width: 120px; height: 1px;
+        background: rgba(200,164,90,0.2);
+        margin-top: 2.5rem;
+      }
+      .sec { padding: 4rem 1.5rem; }
+      .hero-content { padding: 0 1.5rem 4rem; }
+      .hero-scroll { display: none; }
+      #nosotros { grid-template-columns: 1fr; }
+      .nosotros-images { height: 360px; }
+      .nosotros-text { padding: 3rem 1.5rem; }
+      .exp-grid { grid-template-columns: 1fr; }
+      .exp-card { height: 300px; }
+      .galeria-mosaico {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 180px 180px 180px;
+      }
+      .g1,.g2,.g3,.g4,.g5,.g6 { grid-column: auto; grid-row: auto; }
+      .g1 { grid-column: span 2; }
+      .g5 { grid-column: span 2; }
+      .reservacion-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      #ubicacion { grid-template-columns: 1fr; }
+      .ubicacion-img { height: 280px; }
+      .ubicacion-info { padding: 3rem 1.5rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR — estructura del Doc 5 + botón Compartir del Doc 4 -->
+  <nav id="navbar">
+    <a href="#inicio" class="logo"><em>Altum</em> Rooftop</a>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir/cerrar menú" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#menu">Menú</a></li>
+      <li><a href="#experiencias">Experiencias</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#ubicacion">Ubicación</a></li>
+      <li><a href="#reservacion" style="color:var(--dorado);">Reservar</a></li>
+      <li><button id="shareBtn">Compartir</button></li>
+    </ul>
+    <a href="#reservacion" class="nav-cta">Reservar</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="inicio">
+    <div class="hero-line"></div>
+    <div class="hero-line"></div>
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-tag">Medellín · Robledo ·</span>
+      <h1 class="hero-title">
+        La ciudad tiene techo.<br>
+        Nosotros tenemos <em>cielo.</em>
+      </h1>
+      <p class="hero-desc">
+        Gastronomía sostenible sobre las nubes de Medellín.
+        Ingredientes locales, sabores que cuentan la historia de nuestra tierra.
+      </p>
+      <div class="hero-btns">
+        <a href="#reservacion" class="btn-gold">Reservar mesa</a>
+        <a href="#menu" class="btn-outline">Ver menú</a>
+      </div>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section id="nosotros">
+    <div class="nosotros-images">
+      <img src="imagenes/vista-aerea2.jpg" alt="Ambiente Altum">
+      <img src="imagenes/vista-aerea3.jpg" alt="Vista rooftop">
+      <img src="imagenes/vista-aerea4.jpg" alt="Cocina sostenible">
+    </div>
+    <div class="nosotros-text">
+      <span class="label">Donde la montaña abraza la mesa</span>
+      <h2 class="title">Un espacio que nació<br>del amor por <em>lo nuestro</em></h2>
+      <p class="body-text">
+        Altum Rooftop es el resultado de años buscando el punto exacto donde
+        la gastronomía colombiana y la sostenibilidad se encuentran. Cada plato,
+        cada ingrediente y cada detalle del espacio responde a esa búsqueda.
+        Estamos sobre Medellín, pero nuestras raíces son profundamente locales.
+      </p>
+      <div class="stats-row">
+        <div>
+          <span class="stat-n">92%</span>
+          <span class="stat-l">Insumos locales</span>
+        </div>
+        <div>
+          <span class="stat-n">100%</span>
+          <span class="stat-l">Energia solar</span>
+        </div>
+        <div>
+          <span class="stat-n">+30</span>
+          <span class="stat-l">Productores locales</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENÚ -->
+  <section id="menu" class="sec">
+    <div class="menu-top">
+      <div>
+        <span class="label">Del huerto a tu mesa</span>
+        <h2 class="title">Nuestra carta</h2>
+      </div>
+      <div class="menu-cats">
+        <button class="cat active" data-cat="todas" onclick="filtrarMenu(this,'todas')">Todas</button>
+        <button class="cat" data-cat="entradas" onclick="filtrarMenu(this,'entradas')">Entradas</button>
+        <button class="cat" data-cat="fuertes" onclick="filtrarMenu(this,'fuertes')">Platos principales</button>
+        <button class="cat" data-cat="postres" onclick="filtrarMenu(this,'postres')">Postres</button>
+        <button class="cat" data-cat="bebidas" onclick="filtrarMenu(this,'bebidas')">Bebidas</button>
+        <button class="cat" data-cat="eventos" onclick="filtrarMenu(this,'eventos')">Zona de ocio</button>
+      </div>
+    </div>
+
+    <div id="menu-contenido">
+      <p class="menu-cat-titulo" data-cat="entradas">✦ Entradas</p>
+      <div class="menu-row" data-cat="entradas">
+        <div><p class="menu-nombre">Ceviche de mango biche</p><p class="menu-desc">Mango biche, limón Tahití, cilantro cimarrón, camarón del Pacífico y leche de tigre</p></div>
+        <span class="menu-precio">$28.000</span>
+      </div>
+      <div class="menu-row" data-cat="entradas">
+        <div><p class="menu-nombre">Tostada de aguacate hass</p><p class="menu-desc">Pan de masa madre, aguacate hass, huevo pochado, microgreens y aceite de oliva</p></div>
+        <span class="menu-precio">$22.000</span>
+      </div>
+      <div class="menu-row" data-cat="entradas">
+        <div><p class="menu-nombre">Tataki de atún del Caribe</p><p class="menu-desc">Atún sellado, ajonjolí tostado, jengibre fresco y salsa de cítricos colombianos</p></div>
+        <span class="menu-precio">$34.000</span>
+      </div>
+      <div class="menu-row" data-cat="entradas">
+        <div><p class="menu-nombre">Burrata con tomates criollos</p><p class="menu-desc">Burrata artesanal, tomates criollos asados, albahaca y reducción de balsamico</p></div>
+        <span class="menu-precio">$30.000</span>
+      </div>
+      <div class="menu-row" data-cat="entradas">
+        <div><p class="menu-nombre">Tabla para compartir</p><p class="menu-desc">Surtido de entradas y picadas de temporada para disfrutar en mesa</p></div>
+        <span class="menu-precio">$65.000</span>
+      </div>
+
+      <p class="menu-cat-titulo" data-cat="fuertes">✦ Platos principales</p>
+      <div class="menu-row" data-cat="fuertes">
+        <div><p class="menu-nombre">Trucha del río en costra de hierbas</p><p class="menu-desc">Trucha arcoíris, costra de hierbas aromáticas, papas criollas y mantequilla de limón</p></div>
+        <span class="menu-precio">$52.000</span>
+      </div>
+      <div class="menu-row" data-cat="fuertes">
+        <div><p class="menu-nombre">Lomo de res angus con chimichurri</p><p class="menu-desc">Lomo angus a la parrilla, chimichurri de hierbas andinas, puré de yuca y vegetales</p></div>
+        <span class="menu-precio">$68.000</span>
+      </div>
+      <div class="menu-row" data-cat="fuertes">
+        <div><p class="menu-nombre">Risotto de hongos silvestres</p><p class="menu-desc">Arroz arborio, hongos silvestres colombianos, parmesano añejo y aceite de trufa</p></div>
+        <span class="menu-precio">$48.000</span>
+      </div>
+      <div class="menu-row" data-cat="fuertes">
+        <div><p class="menu-nombre">Pechuga de pato con maracuyá</p><p class="menu-desc">Pato confitado, salsa de maracuyá y panela, lenteja beluga y chips de plátano</p></div>
+        <span class="menu-precio">$62.000</span>
+      </div>
+
+      <p class="menu-cat-titulo" data-cat="postres">✦ Postres</p>
+      <div class="menu-row" data-cat="postres">
+        <div><p class="menu-nombre">Volcán de chocolate del Huila</p><p class="menu-desc">Chocolate negro 72%, centro fluido, helado de vainilla y polvo de cacao</p></div>
+        <span class="menu-precio">$22.000</span>
+      </div>
+      <div class="menu-row" data-cat="postres">
+        <div><p class="menu-nombre">Tres leches de guanábana</p><p class="menu-desc">Bizcocho esponjoso, crema de guanábana, merengue tostado y coulis de frutos rojos</p></div>
+        <span class="menu-precio">$20.000</span>
+      </div>
+
+      <p class="menu-cat-titulo" data-cat="bebidas">✦ Bebidas</p>
+      <div class="menu-row" data-cat="bebidas">
+        <div><p class="menu-nombre">Cervezas artesanales y comerciales</p><p class="menu-desc">Selección de cervezas nacionales e importadas</p></div>
+        <span class="menu-precio">$12.000 – $18.000</span>
+      </div>
+      <div class="menu-row" data-cat="bebidas">
+        <div><p class="menu-nombre">Limonada de hierbas del jardín</p><p class="menu-desc">Limón Tahití, hierbas de nuestro huerto, agua con gas y jarabe de jengibre</p></div>
+        <span class="menu-precio">$14.000</span>
+      </div>
+      <div class="menu-row" data-cat="bebidas">
+        <div><p class="menu-nombre">Cold brew de altura</p><p class="menu-desc">Café colombiano de especialidad preparado en frío, 24 horas de extracción</p></div>
+        <span class="menu-precio">$14.000</span>
+      </div>
+      <div class="menu-row" data-cat="bebidas">
+        <div><p class="menu-nombre">Cóctel Altum Sunset</p><p class="menu-desc">Ron añejo, maracuyá, limón, jarabe de panela y espuma de coco</p></div>
+        <span class="menu-precio">$36.000</span>
+      </div>
+      <div class="menu-row" data-cat="bebidas">
+        <div><p class="menu-nombre">Cócteles premium</p><p class="menu-desc">Elaborados con destilados de alta gama y técnicas de mixología</p></div>
+        <span class="menu-precio">$45.000 – $55.000</span>
+      </div>
+
+      <p class="menu-cat-titulo" data-cat="eventos">✦ Acceso zona de ocio</p>
+      <div class="menu-row" data-cat="eventos">
+        <div><p class="menu-nombre">Eventos con DJ</p><p class="menu-desc">Viernes, sábados y domingos — música en vivo y entretenimiento nocturno</p></div>
+        <span class="menu-precio">$30.000 – $40.000</span>
+      </div>
+      <div class="menu-row" data-cat="eventos">
+        <div><p class="menu-nombre">Eventos especiales</p><p class="menu-desc">Noches temáticas, artistas invitados y celebraciones exclusivas</p></div>
+        <span class="menu-precio">$40.000 – $60.000</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIAS -->
+  <section id="experiencias" class="sec">
+    <span class="label">Más que una cena, un ritual</span>
+    <h2 class="title">Experiencias <em>únicas</em><br>en las alturas</h2>
+    <div class="exp-grid">
+      <div class="exp-card">
+        <img src="imagenes/vista-aerea5.jpg" alt="Cena atardecer">
+        <div class="exp-card-content">
+          <p class="exp-tag">Cada viernes y sábado</p>
+          <p class="exp-titulo">Cena al atardecer</p>
+          <p class="exp-desc">Disfruta una cena de autor mientras el sol se despide de Medellín desde 22 pisos de altura.</p>
+        </div>
+      </div>
+      <div class="exp-card">
+        <img src="imagenes/vista-aerea6.jpg" alt="Maridaje café">
+        <div class="exp-card-content">
+          <p class="exp-tag">Experiencia sensorial</p>
+          <p class="exp-titulo">Maridaje con café colombiano</p>
+          <p class="exp-desc">Descubre cómo los varietales colombianos complementan cada plato de nuestra carta.</p>
+        </div>
+      </div>
+      <div class="exp-card">
+        <img src="imagenes/vista-aerea7.jpg" alt="Chef's table">
+        <div class="exp-card-content">
+          <p class="exp-tag">Exclusivo · 6 personas</p>
+          <p class="exp-titulo">Chef's Table privado</p>
+          <p class="exp-desc">El chef diseña un menú degustación único solo para ti y tus invitados.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERÍA -->
+  <section id="galeria" class="sec" style="padding-bottom:0;">
+    <span class="label">Un espacio que se siente</span>
+    <h2 class="title">Galería</h2>
+    <div class="galeria-mosaico">
+      <img class="g1" src="imagenes/vista-aerea1.jpg" alt="Vista 1" onclick="abrirGaleria(0)">
+      <img class="g2" src="imagenes/vista-aerea2.jpg" alt="Vista 2" onclick="abrirGaleria(1)">
+      <img class="g3" src="imagenes/vista-aerea3.jpg" alt="Vista 3" onclick="abrirGaleria(2)">
+      <img class="g4" src="imagenes/vista-aerea4.jpg" alt="Vista 4" onclick="abrirGaleria(3)">
+      <img class="g5" src="imagenes/vista-aerea5.jpg" alt="Vista 5" onclick="abrirGaleria(4)">
+      <img class="g6" src="imagenes/vista-aerea6.jpg" alt="Vista 6" onclick="abrirGaleria(5)">
+    </div>
+  </section>
+
+  <!-- MODAL GALERÍA -->
+  <div id="galeria-modal" class="galeria-modal">
+    <span class="galeria-cerrar" onclick="cerrarGaleria()">&times;</span>
+    <img class="galeria-modal-img" id="galeria-img">
+    <button class="galeria-nav galeria-prev" onclick="cambiarImagen(-1)">&#10094;</button>
+    <button class="galeria-nav galeria-next" onclick="cambiarImagen(1)">&#10095;</button>
+  </div>
+
+  <!-- RESERVACIÓN — formulario completo del Doc 5 + horario completo del Doc 5 -->
+  <section id="reservacion" class="sec">
+    <div class="reservacion-wrap">
+      <div>
+        <span class="label">Tu mesa te espera</span>
+        <h2 class="title">Haz tu<br><em>reservación</em></h2>
+        <p class="body-text" style="max-width:320px;">
+          Reserva con anticipación para garantizar tu lugar sobre las nubes.
+          Para grupos mayores de 8 personas contáctanos directamente.
+        </p>
+        <div style="margin-top:2.5rem;">
+          <div class="horario-row"><span class="horario-dia">Martes – Miércoles – Jueves</span><span class="horario-hora">10:00 am – 10:00 pm</span></div>
+          <div class="horario-row"><span class="horario-dia">Viernes</span><span class="horario-hora">12:00 pm – 2:00 am</span></div>
+          <div class="horario-row"><span class="horario-dia">Sábado</span><span class="horario-hora">12:00 pm – 2:00 am</span></div>
+          <div class="horario-row"><span class="horario-dia">Domingo</span><span class="horario-hora">12:00 pm – 2:00 am</span></div>
+          <div class="horario-row"><span class="horario-dia">Lunes</span><span class="horario-hora">Cerrado</span></div>
+        </div>
+      </div>
+      <form id="reservacion-form" class="form-grid" onsubmit="event.preventDefault(); reservarWhatsApp();">
+        <div class="fg"><label for="nombre">Nombre completo</label><input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required></div>
+        <div class="fg"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" placeholder="correo@ejemplo.com" required></div>
+        <div class="fg"><label for="fecha">Fecha</label><input id="fecha" name="fecha" type="date" required></div>
+        <div class="fg"><label for="hora">Hora</label>
+          <select id="hora" name="hora">
+            <option>12:00 PM</option><option>1:00 PM</option><option>7:00 PM</option><option>8:00 PM</option><option>9:00 PM</option>
+          </select>
+        </div>
+        <div class="fg"><label for="personas">Número de personas</label>
+          <select id="personas" name="personas">
+            <option>1 persona</option><option>2 personas</option><option>3 personas</option><option>4 personas</option><option>5–7 personas</option><option>8+ personas</option>
+          </select>
+        </div>
+        <div class="fg"><label for="ocasion">Ocasión especial</label>
+          <select id="ocasion" name="ocasion">
+            <option>Ninguna</option><option>Cumpleaños</option><option>Aniversario</option><option>Reunión de negocios</option><option>Otra</option>
+          </select>
+        </div>
+        <div class="fg full"><label for="notasTA">Notas adicionales</label><textarea id="notasTA" name="notas" placeholder="Alergias, preferencias o solicitudes especiales..."></textarea></div>
+        <button type="submit" class="btn-form">Reservar por WhatsApp</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- UBICACIÓN -->
+  <section id="ubicacion">
+    <div class="ubicacion-img">
+      <img src="imagenes/vista-aerea8.jpg" alt="Vista Medellín">
+      <span class="ubicacion-badge">Robledo · Medellín</span>
+    </div>
+    <div class="ubicacion-info">
+      <span class="label">Encuéntranos</span>
+      <h2 class="title">Cómo <em>llegar</em></h2>
+      <div class="info-bloque">
+        <p class="info-label">Dirección</p>
+        <p class="info-valor">Cl. 71 #65-337 a 65-319<br>El Progreso, Robledo<br>Medellín, Antioquia</p>
+      </div>
+      <div class="info-bloque">
+        <p class="info-label">Horario</p>
+        <p class="info-valor">Mar–Jue: 10am – 10pm<br>Vie–Dom: 12pm – 2am<br>Lunes: Cerrado</p>
+      </div>
+      <div class="info-bloque">
+        <p class="info-label">Contacto</p>
+        <p class="info-valor">
+          <a href="https://wa.me/573114021797" style="color:inherit;text-decoration:none;">WhatsApp: +57 311 402 1797</a><br>
+          altumrooftop&#64;gmail.com
+        </p>
+      </div>
+      <a href="#reservacion" class="btn-gold" style="margin-top:1rem;">Reservar ahora</a>
+    </div>
+  </section>
+
+  <!-- FOOTER completo del Doc 5 -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <p class="footer-brand"><em>Altum</em> Rooftop</p>
+        <p class="footer-desc">Gastronomía sostenible sobre las nubes de Medellín. Porque comer bien es también cuidar el planeta y a quienes lo habitan.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-label">Navegación</p>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#menu">Menú</a></li>
+          <li><a href="#experiencias">Experiencias</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#reservacion">Reservaciones</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-label">Horario</p>
+        <ul>
+          <li><a>Mar–Jue: 10am – 10pm</a></li>
+          <li><a>Vie–Dom: 12pm – 2am</a></li>
+          <li><a>Lunes: Cerrado</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-label">Contacto</p>
+        <ul>
+          <li><a href="https://wa.me/573114021797">WhatsApp: +57 311 402 1797</a></li>
+          <li><a href="mailto:altumrooftop@gmail.com">altumrooftop&#64;gmail.com</a></li>
+          <li><a href="#ubicacion">Robledo, Medellín</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Altum Rooftop · Todos los derechos reservados</p>
+      <div class="footer-socials">
+        <a href="https://wa.me/573114021797">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Navbar scroll ──
+    const nav = document.getElementById('navbar');
+    if (nav) {
+      window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 80);
+      });
+    }
+
+    // ── Menú hamburguesa ──
+    const toggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    if (toggle && navLinks) {
+      toggle.addEventListener('click', () => {
+        const isOpen = toggle.classList.toggle('abierto');
+        navLinks.classList.toggle('abierto', isOpen);
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      });
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          toggle.classList.remove('abierto');
+          navLinks.classList.remove('abierto');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    // ── Botón Compartir — lógica del Doc 4 con navigator.share nativo ──
+    document.getElementById('shareBtn').onclick = async () => {
+      try {
+        await navigator.share({
+          title: 'Altum Rooftop',
+          text: 'Mira este Rooftop en Medellín',
+          url: window.location.href
+        });
+      } catch (err) {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Enlace copiado al portapapeles');
+      }
+    };
+
+    // ── Reserva por WhatsApp — del Doc 5 ──
+    function reservarWhatsApp() {
+      const nombre   = document.getElementById('nombre')?.value?.trim() || 'Sin nombre';
+      const fecha    = document.getElementById('fecha')?.value || 'Sin fecha';
+      const hora     = document.getElementById('hora')?.value || 'Sin hora';
+      const personas = document.getElementById('personas')?.value || 'Sin personas';
+      const ocasion  = document.getElementById('ocasion')?.value || 'Ninguna';
+      const notas    = document.getElementById('notasTA')?.value?.trim() || '';
+      const msg = `Hola Altum Rooftop! Quiero hacer una reservación 🙏\n\n👤 Nombre: ${nombre}\n📅 Fecha: ${fecha}\n🕐 Hora: ${hora}\n👥 Personas: ${personas}\n🎉 Ocasión: ${ocasion}${notas ? '\n📝 Notas: ' + notas : ''}`;
+      window.open('https://wa.me/573114021797?text=' + encodeURIComponent(msg), '_blank', 'noopener,noreferrer');
+    }
+
+    // ── Filtro menú — del Doc 5 ──
+    function filtrarMenu(btn, cat) {
+      document.querySelectorAll('.cat').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.menu-cat-titulo').forEach(t => {
+        t.style.display = (cat === 'todas' || t.dataset.cat === cat) ? '' : 'none';
+      });
+      document.querySelectorAll('.menu-row').forEach(r => {
+        r.style.display = (cat === 'todas' || r.dataset.cat === cat) ? '' : 'none';
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.menu-cat-titulo').forEach(t => t.style.display = '');
+      document.querySelectorAll('.menu-row').forEach(r => r.style.display = '');
+    });
+
+    // ── GALERÍA FUNCIONAL ──
+    let indiceActual = 0;
+    const imagenesGaleria = [
+      'imagenes/vista-aerea1.jpg',
+      'imagenes/vista-aerea2.jpg',
+      'imagenes/vista-aerea3.jpg',
+      'imagenes/vista-aerea4.jpg',
+      'imagenes/vista-aerea5.jpg',
+      'imagenes/vista-aerea6.jpg'
+    ];
+
+    function abrirGaleria(indice) {
+      indiceActual = indice;
+      const modal = document.getElementById('galeria-modal');
+      const img = document.getElementById('galeria-img');
+      img.src = imagenesGaleria[indice];
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // Evitar scroll
+    }
+
+    function cerrarGaleria() {
+      const modal = document.getElementById('galeria-modal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    function cambiarImagen(direccion) {
+      indiceActual += direccion;
+      if (indiceActual < 0) indiceActual = imagenesGaleria.length - 1;
+      if (indiceActual >= imagenesGaleria.length) indiceActual = 0;
+      const img = document.getElementById('galeria-img');
+      img.src = imagenesGaleria[indiceActual];
+    }
+
+    // Cerrar con ESC
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') cerrarGaleria();
+      if (event.key === 'ArrowLeft') cambiarImagen(-1);
+      if (event.key === 'ArrowRight') cambiarImagen(1);
+    });
+
+    // Cerrar clicando fuera
+    document.getElementById('galeria-modal').addEventListener('click', function(event) {
+      if (event.target === this) cerrarGaleria();
+    });
+  </script>
+</body>
+</html>
